@@ -22,7 +22,9 @@ import org.openhab.core.thing.Bridge;
 import org.openwebnet4j.message.BaseOpenMessage;
 import org.openwebnet4j.message.FrameException;
 import org.openwebnet4j.message.Where;
+import org.openwebnet4j.message.WhereEnergyManager;
 import org.openwebnet4j.message.WhereLightAutom;
+import org.openwebnet4j.message.WhereThermo;
 import org.openwebnet4j.message.WhereZigBee;
 import org.openwebnet4j.message.Who;
 import org.slf4j.Logger;
@@ -68,12 +70,13 @@ public class OwnIdTest {
         zb_switch_2u_1(new WhereZigBee("789301201#9"), Who.fromValue(1), "*1*1*789301201#9##", "789301200h9", "1.789301200h9", "789301200h9"),
         zb_switch_2u_2(new WhereZigBee("789301202#9"), Who.fromValue(1), "*1*1*789301202#9##", "789301200h9", "1.789301200h9", "789301200h9"),
         bus_switch(new WhereLightAutom("51"), Who.fromValue(1), "*1*1*51##", "51", "1.51", "51"),
-        bus_localbus(new WhereLightAutom("25#4#01"), Who.fromValue(1), "*1*1*25#4#01##", "25h4h01", "1.25h4h01", "25h4h01");
-        //bus_thermo_zone(new WhereThermo("1"), Who.fromValue(4),"*#4*1*0*0020##" , "1", "4.1", "1"),
+        bus_localbus(new WhereLightAutom("25#4#01"), Who.fromValue(1), "*1*1*25#4#01##", "25h4h01", "1.25h4h01", "25h4h01"),
+        bus_thermo_zone(new WhereThermo("1"), Who.fromValue(4),"*#4*1*0*0020##" , "1", "4.1", "1"),
+        bus_energy(new WhereEnergyManager("51"), Who.fromValue(18), "*#18*51*113##", "51", "18.51", "51");
         //bus_thermo_zone_act(new WhereThermo("2#1"), Who.fromValue(4),"*#4*2#1*20*0##" ,"2", "4.2", "2"),
         //bus_thermo_via_cu(new WhereThermo("#1"), Who.fromValue(4),"*#4*#1*0*0020##" ,"1", "4.1", "1"),
         // bus_tempSensor("500", "4", "500", "4.500", "500"),
-        // bus_energy("51", "18", "51", "18.51", "51");
+
 
         // @formatter:on
 

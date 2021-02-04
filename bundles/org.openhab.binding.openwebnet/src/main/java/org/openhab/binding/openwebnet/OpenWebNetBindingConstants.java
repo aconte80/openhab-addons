@@ -52,6 +52,16 @@ public class OpenWebNetBindingConstants {
     public static final String THING_LABEL_BUS_DIMMER = "Dimmer";
     public static final ThingTypeUID THING_TYPE_BUS_AUTOMATION = new ThingTypeUID(BINDING_ID, "bus_automation");
     public static final String THING_LABEL_BUS_AUTOMATION = "Automation";
+    public static final ThingTypeUID THING_TYPE_BUS_ENERGY_CENTRAL_UNIT = new ThingTypeUID(BINDING_ID,
+            "bus_energy_central_unit");
+    public static final String THING_LABEL_BUS_ENERGY_CENTRAL_UNIT = "Energy Central Unit";
+    public static final ThingTypeUID THING_TYPE_BUS_TEMP_SENSOR = new ThingTypeUID(BINDING_ID, "bus_temp_sensor");
+    public static final String THING_LABEL_BUS_TEMP_SENSOR = "Temperature Sensor";
+    public static final ThingTypeUID THING_TYPE_BUS_THERMOSTAT = new ThingTypeUID(BINDING_ID, "bus_thermostat");
+    public static final String THING_LABEL_BUS_THERMOSTAT = "Thermostat";
+    public static final ThingTypeUID THING_TYPE_BUS_THERMO_CENTRAL_UNIT = new ThingTypeUID(BINDING_ID,
+            "bus_thermo_central_unit");
+    public static final String THING_LABEL_BUS_THERMO_CENTRAL_UNIT = "Thermo Central Unit";
 
     // ZIGBEE
     public static final ThingTypeUID THING_TYPE_ZB_ON_OFF_SWITCH = new ThingTypeUID(BINDING_ID, "zb_on_off_switch");
@@ -76,9 +86,19 @@ public class OpenWebNetBindingConstants {
     public static final Set<ThingTypeUID> AUTOMATION_SUPPORTED_THING_TYPES = new HashSet<>(
             Arrays.asList(THING_TYPE_ZB_AUTOMATION, THING_TYPE_BUS_AUTOMATION));
 
+    // ## Thermoregulation
+    public static final Set<ThingTypeUID> THERMOREGULATION_SUPPORTED_THING_TYPES = new HashSet<>(
+            Arrays.asList(THING_TYPE_BUS_TEMP_SENSOR, THING_TYPE_BUS_THERMOSTAT, THING_TYPE_BUS_THERMO_CENTRAL_UNIT));
+
+    // ## Energy Management
+    public static final Set<ThingTypeUID> ENERGY_MANAGEMENT_SUPPORTED_THING_TYPES = new HashSet<>(
+            Arrays.asList(THING_TYPE_BUS_ENERGY_CENTRAL_UNIT));
+
     // ## Groups
     public static final Set<ThingTypeUID> DEVICE_SUPPORTED_THING_TYPES = Stream
-            .of(LIGHTING_SUPPORTED_THING_TYPES, AUTOMATION_SUPPORTED_THING_TYPES, GENERIC_SUPPORTED_THING_TYPES)
+            .of(LIGHTING_SUPPORTED_THING_TYPES, AUTOMATION_SUPPORTED_THING_TYPES,
+                    THERMOREGULATION_SUPPORTED_THING_TYPES, ENERGY_MANAGEMENT_SUPPORTED_THING_TYPES,
+                    GENERIC_SUPPORTED_THING_TYPES)
             .flatMap(Collection::stream).collect(Collectors.toCollection(HashSet::new));
 
     public static final Set<ThingTypeUID> BRIDGE_SUPPORTED_THING_TYPES = new HashSet<>(
@@ -94,8 +114,27 @@ public class OpenWebNetBindingConstants {
     public static final String CHANNEL_SWITCH_01 = "switch_01";
     public static final String CHANNEL_SWITCH_02 = "switch_02";
     public static final String CHANNEL_BRIGHTNESS = "brightness";
+
     // automation
     public static final String CHANNEL_SHUTTER = "shutter";
+
+    // thermo
+    public static final String CHANNEL_TEMPERATURE = "temperature";
+    public static final String CHANNEL_TEMP_TARGET = "targetTemperature";
+    public static final String CHANNEL_THERMO_FUNCTION = "thermoFunction";
+    public static final String CHANNEL_HEATING_COOLING_MODE = "heatingCoolingMode";
+    public static final String CHANNEL_HEATING = "heating";
+    public static final String CHANNEL_COOLING = "cooling";
+    public static final String CHANNEL_ACTIVE_MODE = "activeMode";
+    public static final String CHANNEL_LOCAL_MODE = "localMode";
+    public static final String CHANNEL_TEMP_SETPOINT = "setpointTemperature";
+    public static final String CHANNEL_SET_MODE = "setMode";
+    public static final String CHANNEL_ALL_TEMP_SETPOINT = "allSetpointTemperature";
+    public static final String CHANNEL_ALL_SET_MODE = "allSetMode";
+    public static final String CHANNEL_ALL_THERMO_FUNCTION = "allThermoFunction";
+
+    // energy management
+    public static final String CHANNEL_POWER = "power";
 
     // devices config properties
     public static final String CONFIG_PROPERTY_WHERE = "where";

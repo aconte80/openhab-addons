@@ -129,6 +129,33 @@ public class OpenWebNetDeviceDiscoveryService extends AbstractDiscoveryService
                 deviceWho = Who.AUTOMATION;
                 break;
             }
+
+            case SCS_TEMP_SENSOR: {
+                thingTypeUID = OpenWebNetBindingConstants.THING_TYPE_BUS_TEMP_SENSOR;
+                thingLabel = OpenWebNetBindingConstants.THING_LABEL_BUS_TEMP_SENSOR;
+                deviceWho = Who.THERMOREGULATION;
+                break;
+            }
+            case SCS_THERMOSTAT: {
+                thingTypeUID = OpenWebNetBindingConstants.THING_TYPE_BUS_THERMOSTAT;
+                thingLabel = OpenWebNetBindingConstants.THING_LABEL_BUS_THERMOSTAT;
+                deviceWho = Who.THERMOREGULATION;
+                break;
+            }
+            case SCS_THERMO_CENTRAL_UNIT: {
+                thingTypeUID = OpenWebNetBindingConstants.THING_TYPE_BUS_THERMO_CENTRAL_UNIT;
+                thingLabel = OpenWebNetBindingConstants.THING_LABEL_BUS_THERMO_CENTRAL_UNIT;
+                deviceWho = Who.THERMOREGULATION;
+                break;
+            }
+
+            case SCS_ENERGY_CENTRAL_UNIT: {
+                thingTypeUID = OpenWebNetBindingConstants.THING_TYPE_BUS_ENERGY_CENTRAL_UNIT;
+                thingLabel = OpenWebNetBindingConstants.THING_LABEL_BUS_ENERGY_CENTRAL_UNIT;
+                deviceWho = Who.ENERGY_MANAGEMENT;
+                break;
+            }
+
             default:
                 logger.warn("Device type {} is not supported, default to GENERIC device (WHERE={})", deviceType, where);
                 if (where instanceof WhereZigBee) {
