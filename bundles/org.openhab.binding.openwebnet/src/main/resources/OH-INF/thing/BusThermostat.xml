@@ -26,6 +26,7 @@
 			<!-- read/write -->
 			<channel id="setpointTemperature" typeId="setpointTemperature"/>
 			<channel id="setMode" typeId="setMode"/>
+			<channel id="fanSpeed" typeId="fanSpeed"/>
 		</channels>
 
 		<properties>

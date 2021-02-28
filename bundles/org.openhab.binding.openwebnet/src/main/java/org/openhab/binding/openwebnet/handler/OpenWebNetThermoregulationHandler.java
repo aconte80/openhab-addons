@@ -15,6 +15,7 @@ package org.openhab.binding.openwebnet.handler;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_ACTIVE_MODE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_ALL_SET_MODE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_ALL_TEMP_SETPOINT;
+import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_FAN_SPEED;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_HEATING_COOLING_MODE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_LOCAL_MODE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_SET_MODE;
@@ -45,6 +46,7 @@ import org.openwebnet4j.message.BaseOpenMessage;
 import org.openwebnet4j.message.FrameException;
 import org.openwebnet4j.message.MalformedFrameException;
 import org.openwebnet4j.message.Thermoregulation;
+import org.openwebnet4j.message.Thermoregulation.FAN_COIL_SPEED;
 import org.openwebnet4j.message.Thermoregulation.LOCAL_OFFSET;
 import org.openwebnet4j.message.Thermoregulation.MODE;
 import org.openwebnet4j.message.Where;
@@ -141,6 +143,9 @@ public class OpenWebNetThermoregulationHandler extends OpenWebNetThingHandler {
                 handleModeCommand(command);
                 logger.trace("handleChannelCommand() TODO Unsupported handleModeCommand! {}", channel.getId());
                 break;
+            case CHANNEL_FAN_SPEED:
+                handleSetFanSpeedCommand(command);
+                break;
             default: {
                 logger.warn("handleChannelCommand() Unsupported ChannelUID {}", channel.getId());
             }
@@ -166,6 +171,23 @@ public class OpenWebNetThermoregulationHandler extends OpenWebNetThingHandler {
     @Override
     protected String ownIdPrefix() {
         return Who.THERMOREGULATION.value().toString();
+    }
+
+    private void handleSetFanSpeedCommand(Command command) {
+        logger.debug("handleSetFanSpeedCommand() (command={})", command);
+
+        if (command instanceof StringType) {
+            FAN_COIL_SPEED speed = FAN_COIL_SPEED.valueOf(command.toString());
+
+            try {
+                bridgeHandler.gateway.send(Thermoregulation.requestWriteFanCoilSpeed(deviceWhere.value(), speed));
+            } catch (OWNException e) {
+                logger.warn("handleSetFanSpeedCommand() {}", e.getMessage());
+            }
+        } else {
+            logger.warn("handleSetFanSpeedCommand() Cannot handle command {} for thing {}", command,
+                    getThing().getUID());
+        }
     }
 
     private void handleSetpointCommand(Command command) {
@@ -242,6 +264,8 @@ public class OpenWebNetThermoregulationHandler extends OpenWebNetThingHandler {
                 updateActuatorStatus((Thermoregulation) msg);
             } else if (msg.getDim() == Thermoregulation.DIM.TEMP_TARGET) {
                 updateTargetTemp((Thermoregulation) msg);
+            } else if (msg.getDim() == Thermoregulation.DIM.FAN_COIL_SPEED) {
+                updateFanCoilSpeed((Thermoregulation) msg);
             } else {
                 logger.debug("handleMessage() Ignoring unsupported DIM for thing {}. Frame={}", getThing().getUID(),
                         msg);
@@ -423,6 +447,11 @@ public class OpenWebNetThermoregulationHandler extends OpenWebNetThingHandler {
             logger.warn("updateTargetTemp() FrameException on frame {}: {}", tmsg, e.getMessage());
             updateState(CHANNEL_TEMP_TARGET, UnDefType.UNDEF);
         }
+    }
+
+    private void updateFanCoilSpeed(Thermoregulation tmsg) {
+        logger.debug("updateFanCoilSpeed() for thing: {}", thing.getUID());
+        logger.debug("UNSUPPORTED");
     }
 
     private static Mode whatToMode(Thermoregulation.WHAT w) {

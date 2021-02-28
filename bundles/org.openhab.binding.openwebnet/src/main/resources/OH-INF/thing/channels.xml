@@ -159,6 +159,20 @@
 		</state>
 	</channel-type>
 
+	<channel-type id="fanSpeed">
+		<item-type>String</item-type>
+		<label>Set fan speed</label>
+		<description>Set speed of the Fan Coil from Central Unit/openHAB (read/write)</description>
+		<state>
+			<options>
+				<option value="AUTO">Auto</option>
+				<option value="VEL1">Fan speed 1</option>
+				<option value="VEL2">Fan speed 2</option>
+				<option value="VEL3">Fan speed 3</option>
+			</options>
+		</state>
+	</channel-type>
+
 	<!-- Energy channels -->
 	<channel-type id="power">
 		<item-type>Number</item-type>

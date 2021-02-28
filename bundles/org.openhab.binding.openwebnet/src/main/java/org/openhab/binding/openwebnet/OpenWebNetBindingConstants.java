@@ -132,6 +132,7 @@ public class OpenWebNetBindingConstants {
     public static final String CHANNEL_ALL_TEMP_SETPOINT = "allSetpointTemperature";
     public static final String CHANNEL_ALL_SET_MODE = "allSetMode";
     public static final String CHANNEL_ALL_THERMO_FUNCTION = "allThermoFunction";
+    public static final String CHANNEL_FAN_SPEED = "fanSpeed";
 
     // energy management
     public static final String CHANNEL_POWER = "power";
