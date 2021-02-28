@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2019 Contributors to the openHAB project
+ * Copyright (c) 2010-2021 Contributors to the openHAB project
  *
  * See the NOTICE file(s) distributed with this work for additional
  * information.
@@ -12,7 +12,7 @@
  */
 package org.openhab.binding.openwebnet.handler;
 
-import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.*;
+import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_ACTIVE_MODE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_ALL_SET_MODE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_ALL_TEMP_SETPOINT;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_HEATING_COOLING_MODE;
@@ -21,6 +21,7 @@ import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_TEMPERATURE;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_TEMP_SETPOINT;
 import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_TEMP_TARGET;
+import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.CHANNEL_THERMO_FUNCTION;
 import static org.openhab.core.library.unit.SIUnits.CELSIUS;
 
 import java.math.BigDecimal;

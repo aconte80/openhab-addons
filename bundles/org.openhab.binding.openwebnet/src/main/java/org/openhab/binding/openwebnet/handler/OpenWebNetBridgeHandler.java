@@ -12,7 +12,9 @@
  */
 package org.openhab.binding.openwebnet.handler;
 
-import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.*;
+import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.PROPERTY_FIRMWARE_VERSION;
+import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.PROPERTY_SERIAL_NO;
+import static org.openhab.binding.openwebnet.OpenWebNetBindingConstants.THING_TYPE_ZB_GATEWAY;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -45,7 +47,6 @@ import org.openwebnet4j.communication.OWNAuthException;
 import org.openwebnet4j.communication.OWNException;
 import org.openwebnet4j.message.Automation;
 import org.openwebnet4j.message.BaseOpenMessage;
-import org.openwebnet4j.message.EnergyManagement;
 import org.openwebnet4j.message.FrameException;
 import org.openwebnet4j.message.GatewayMgmt;
 import org.openwebnet4j.message.Lighting;
@@ -288,8 +289,11 @@ public class OpenWebNetBridgeHandler extends ConfigStatusBridgeHandler implement
             logger.warn("discoverByActivation: null OpenWebNetDeviceDiscoveryService, ignoring msg={}", baseMsg);
             return;
         }
-        if (baseMsg instanceof Lighting || baseMsg instanceof Automation || baseMsg instanceof EnergyManagement
-                || baseMsg instanceof Thermoregulation) { // we support these types only
+        if (baseMsg instanceof Lighting || baseMsg instanceof Automation || baseMsg instanceof Thermoregulation) { // we
+                                                                                                                   // support
+                                                                                                                   // these
+                                                                                                                   // types
+                                                                                                                   // only
             BaseOpenMessage bmsg = baseMsg;
             if (baseMsg instanceof Lighting) {
                 What what = baseMsg.getWhat();
@@ -389,8 +393,7 @@ public class OpenWebNetBridgeHandler extends ConfigStatusBridgeHandler implement
 
         BaseOpenMessage baseMsg = (BaseOpenMessage) msg;
         // let's try to get the Thing associated with this message...
-        if (baseMsg instanceof Lighting || baseMsg instanceof Automation || baseMsg instanceof EnergyManagement
-                || baseMsg instanceof Thermoregulation) {
+        if (baseMsg instanceof Lighting || baseMsg instanceof Automation || baseMsg instanceof Thermoregulation) {
             String ownId = ownIdFromMessage(baseMsg);
             logger.debug("ownIdFromMessage({}) --> {}", baseMsg, ownId);
             OpenWebNetThingHandler deviceHandler = registeredDevices.get(ownId);

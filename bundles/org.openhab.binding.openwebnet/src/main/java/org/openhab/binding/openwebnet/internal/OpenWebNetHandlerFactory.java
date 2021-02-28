@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openhab.binding.openwebnet.handler.OpenWebNetAutomationHandler;
 import org.openhab.binding.openwebnet.handler.OpenWebNetBridgeHandler;
-import org.openhab.binding.openwebnet.handler.OpenWebNetEnergyHandler;
 import org.openhab.binding.openwebnet.handler.OpenWebNetGenericHandler;
 import org.openhab.binding.openwebnet.handler.OpenWebNetLightingHandler;
 import org.openhab.binding.openwebnet.handler.OpenWebNetThermoregulationHandler;
@@ -65,9 +64,9 @@ public class OpenWebNetHandlerFactory extends BaseThingHandlerFactory {
         } else if (OpenWebNetThermoregulationHandler.SUPPORTED_THING_TYPES.contains(thing.getThingTypeUID())) {
             logger.debug("creating NEW THERMO Handler");
             return new OpenWebNetThermoregulationHandler(thing);
-        } else if (OpenWebNetEnergyHandler.SUPPORTED_THING_TYPES.contains(thing.getThingTypeUID())) {
-            logger.debug("creating NEW ENERGY Handler");
-            return new OpenWebNetEnergyHandler(thing);
+            // } else if (OpenWebNetEnergyHandler.SUPPORTED_THING_TYPES.contains(thing.getThingTypeUID())) {
+            // logger.debug("creating NEW ENERGY Handler");
+            // return new OpenWebNetEnergyHandler(thing);
         }
         logger.warn("ThingType {} is not supported by this binding", thing.getThingTypeUID());
         return null;
