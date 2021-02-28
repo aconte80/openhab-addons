@@ -439,9 +439,9 @@ public class OpenWebNetThermoregulationHandler extends OpenWebNetThingHandler {
 
     private void updateTargetTemp(Thermoregulation tmsg) {
         logger.debug("updateTargetTemp() for thing: {}", thing.getUID());
-        Double temp;
+
         try {
-            temp = Thermoregulation.parseTemperature(tmsg);
+            Double temp = Thermoregulation.parseTemperature(tmsg);
             updateState(CHANNEL_TEMP_TARGET, new DecimalType(temp));
         } catch (FrameException e) {
             logger.warn("updateTargetTemp() FrameException on frame {}: {}", tmsg, e.getMessage());
@@ -451,7 +451,14 @@ public class OpenWebNetThermoregulationHandler extends OpenWebNetThingHandler {
 
     private void updateFanCoilSpeed(Thermoregulation tmsg) {
         logger.debug("updateFanCoilSpeed() for thing: {}", thing.getUID());
-        logger.debug("UNSUPPORTED");
+
+        try {
+            FAN_COIL_SPEED speed = Thermoregulation.parseFanCoilSpeed(tmsg);
+            updateState(CHANNEL_FAN_SPEED, new StringType(speed.toString()));
+        } catch (FrameException e) {
+            logger.warn("updateFanCoilSpeed() FrameException on frame {}: {}", tmsg, e.getMessage());
+            updateState(CHANNEL_FAN_SPEED, UnDefType.UNDEF);
+        }
     }
 
     private static Mode whatToMode(Thermoregulation.WHAT w) {
